@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <!--<link rel="stylesheet" href="https://act.weixin.qq.com/static/cdn/css/wepayui/0.1.1/wepayui.min.css">-->
+    <link rel="stylesheet" href="./css/pay.css">
+    <link rel="stylesheet" href="./css/keyboard.css">
+    <title>向商户付款</title>
+</head>
+<!--
+	通用说明：
+	1.模块的隐藏添加class:hide;
+	2.body标签默认绑定ontouchstart事件，激活所有按钮的:active效果
+-->
+<body ontouchstart class="weui-wepay-pay-wrap">
+<div class="pay-top">
+    <form>
+        <div class="pay-shop-info">
+            <div class="content">
+                <img class="shop-logo" src="images/shop-logo.png" alt="商家logo">
+                <div class="shop-name">简米科技</div>
+                <div class="shop-category">
+                    <span class="shop-category-1">门店</span>
+                    <span class="shop-category-2">简米科技</span>
+                </div>
+            </div>
+            <button class="add-msg">添加备注</button>
+        </div>
+        <div class="pay-input-money">
+            <div class="input-left">
+                <span>消费金额</span>
+            </div>
+            <div class="input-right">
+                <span>￥</span>
+                <label id="paymoney" type="text"></label>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="ad-placeholder">
+    <p><a href="#">这里可能会出现一条广告</a></p>
+</div>
+<div class="about-us">
+    <p><a href="#">简米商户</a>专业为商户提供收钱服务</p>
+</div>
+<div class="payinfo">
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="paynum">1</td>
+            <td class="paynum">2</td>
+            <td class="paynum">3</td>
+            <td id="pay-return">
+                <div class="keybord-return"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="paynum">4</td>
+            <td class="paynum">5</td>
+            <td class="paynum">6</td>
+            <td rowspan="3" class="pay">
+                <a href="javascript:return false;">
+                    <div class="a-pay">
+                        <p>确认</p>
+                        <p>支付</p>
+                    </div>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="paynum">7</td>
+            <td class="paynum">8</td>
+            <td class="paynum">9</td>
+        </tr>
+        <tr>
+            <td id="pay-zero" colspan="2" class="payzero">0</td>
+            <td id="pay-float">.</td>
+        </tr>
+    </table>
+</div>
+</body>
+<script src="./js/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".payinfo").slideDown();
+        var $paymoney = $("#paymoney");
+        // 大写金额
+        var upperCaseMoney = $('.upper-case span');
+        $("#paymoney").focus(function(){
+            $(".payinfo").slideDown();
+            document.activeElement.blur();
+        });
+        $(".paynum").each(function(){
+            $(this).click(function(){
+                if(($paymoney.text()).indexOf(".") != -1 && ($paymoney.text()).substring(($paymoney.text()).indexOf(".") + 1, ($paymoney.text()).length).length == 2){
+                    return;
+                }
+                if($.trim($paymoney.text()) == "0"){
+                    return;
+                }
+                if (parseInt($paymoney.text()) > 10000 && $paymoney.text().indexOf(".") == -1) {
+                    return;
+                }
+                $('.pay').removeClass('pay-disabled').find('a').attr('href','pay-result.html');
+                $paymoney.text($paymoney.text() + $(this).text());
+                upperCaseMoney.text(digitUppercase($paymoney.text()));
+            });
+        });
+
+        $("#pay-return").click(function(){
+            $paymoney.text(($paymoney.text()).substring(0, ($paymoney.text()).length - 1));
+            upperCaseMoney.text(digitUppercase($paymoney.text()));
+            if (!$paymoney.text()) {
+                upperCaseMoney.text('');
+                $('.pay').addClass('pay-disabled').find('a').attr('href', 'javascript:return false;');
+            }
+        });
+
+        $("#pay-zero").click(function(){
+            if(($paymoney.text()).indexOf(".") != -1 && ($paymoney.text()).substring(($paymoney.text()).indexOf(".") + 1, ($paymoney.text()).length).length == 2){
+                return;
+            }
+            if($.trim($paymoney.text()) == "0"){
+                return;
+            }
+            if (parseInt($paymoney.text()) > 10000 && $paymoney.text().indexOf(".") == -1) {
+                return;
+            }
+            $paymoney.text($paymoney.text() + $(this).text());
+        });
+
+        $("#pay-float").click(function(){
+            if($.trim($paymoney.text()) == ""){
+                return;
+            }
+
+            if(($paymoney.text()).indexOf(".") != -1){
+                return;
+            }
+
+            if(($paymoney.text()).indexOf(".") != -1){
+                return;
+            }
+
+            $paymoney.text($paymoney.text() + $(this).text());
+        });
+        if (!$paymoney.text()) {
+            $('.pay').addClass('pay-disabled');
+        }
+    });
+</script>
+<!--自适应布局-->
+<script>
+    (function () {
+        var designW = 750;  //设计稿宽
+        var font_rate = 100;
+        //适配
+        document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+
+        //监测窗口大小变化
+        window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function () {
+            document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+            document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        }, false);
+    })();
+</script>
+
+</html>
