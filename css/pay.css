@@ -53,12 +53,13 @@
 .shop-category-1{
     background-color: #b2abad;
     color: #ECECEC;
-    padding: 0.02rem;
+    padding: 0.05rem;
     font-size: 0.2rem;
     border-radius: 0.15rem;
 }
 .shop-category-2{
     color: #7d7d7e;
+    font-size: 0.2rem;
 }
 .add-msg{
     width: 40%;
@@ -95,7 +96,7 @@
     font-size: 0.4rem;
 }
 .ad-placeholder{
-    font-size: 0.4rem;
+    font-size: 0.3rem;
     text-align: center;
 }
 .ad-placeholder a{

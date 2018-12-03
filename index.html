@@ -117,6 +117,8 @@
             if (!$paymoney.text()) {
                 upperCaseMoney.text('');
                 $('.pay').addClass('pay-disabled').find('a').attr('href', 'javascript:return false;');
+            }else{
+                $('.pay').removeClass('pay-disabled').find('a').attr('href', 'javascript:return false;');
             }
         });
 
