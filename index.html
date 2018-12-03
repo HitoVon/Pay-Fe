@@ -94,6 +94,18 @@
             $(".payinfo").slideDown();
             document.activeElement.blur();
         });
+
+        $(".add-msg").click(function(){
+            var x;
+            var r=confirm("按下按钮!");
+            if (r==true){
+                x="你按下了\"确定\"按钮!";
+            }
+            else{
+                x="你按下了\"取消\"按钮!";
+            }
+        });
+
         $(".paynum").each(function(){
             $(this).click(function(){
                 if(($paymoney.text()).indexOf(".") != -1 && ($paymoney.text()).substring(($paymoney.text()).indexOf(".") + 1, ($paymoney.text()).length).length == 2){

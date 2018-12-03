@@ -62,7 +62,7 @@
     font-size: 0.2rem;
 }
 .add-msg{
-    width: 40%;
+    width: auto;
     text-align: right;
     color: #fe9b20;
     border: none;
@@ -80,7 +80,7 @@
 }
 .input-left {
     float: left;
-    font-size: 0.25rem;
+    font-size: 0.3rem;
     color: #b2abad;
     padding-left: 0.24rem;
     border-radius: 0.1rem;
