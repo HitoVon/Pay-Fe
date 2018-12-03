@@ -54,7 +54,7 @@
     background-color: #b2abad;
     color: #ECECEC;
     padding: 0.02rem;
-    font-size: 0.15rem;
+    font-size: 0.2rem;
     border-radius: 0.15rem;
 }
 .shop-category-2{
@@ -64,6 +64,8 @@
     width: 40%;
     text-align: right;
     color: #fe9b20;
+    border: none;
+    background-color: transparent;
 }
 .pay-input-money {
     width: auto;
@@ -83,7 +85,7 @@
     border-radius: 0.1rem;
 }
 .input-right {
-    font-size: 0.4rem;
+    font-size: 0.3rem;
     float: right;
     border-radius: 0.1rem;
 }
@@ -93,7 +95,7 @@
     font-size: 0.4rem;
 }
 .ad-placeholder{
-    font-size: 0.2rem;
+    font-size: 0.4rem;
     text-align: center;
 }
 .ad-placeholder a{
@@ -101,9 +103,9 @@
 }
 .about-us{
     text-align: center;
-    font-size: 0.15rem;
+    font-size: 0.3rem;
     color: #27408B;
-    margin-top: 2.4rem;
+    margin-top: 1.4rem;
 }
 .about-us a{
     color: #fe9b20;
